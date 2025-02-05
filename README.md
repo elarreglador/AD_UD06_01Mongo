@@ -36,7 +36,7 @@ mvn install
 
 Configurar MongoDB: Asegúrate de que tu servidor MongoDB esté en funcionamiento. 
 
-##Esta mongo funcionando?
+## Esta mongo funcionando?
 
 Ejecuta este comando en la terminal para ver si el servicio está activo:
 
@@ -61,7 +61,7 @@ Si quieres que NO se inicie automáticamente al arrancar el sistema:
 sudo systemctl disable mongod
 ```
 
-##Uso
+## Uso
 
 Conectar a MongoDB: La aplicación se conecta a una base de datos llamada mflix que contiene una colección llamada peliculas.
 
@@ -71,7 +71,7 @@ Actualización de una película: Una vez que se encuentra la película, la aplic
 
 Guardar los cambios: Después de actualizar el título, la aplicación guarda la modificación en la base de datos.
 
-##Ejemplo de ejecución
+## Ejemplo de ejecución
 
 Salida esperada:
 
@@ -96,7 +96,7 @@ Peliculas [title=Jurassic World 3, year=2015, directors=[Colin Trevorrow]]
 Guardamos la modificacion
 ```
 
-##Estructura del proyecto
+## Estructura del proyecto
 
 El proyecto tiene la siguiente estructura:
 
@@ -109,6 +109,6 @@ mongo01/
  └── pom.xml                  		   # Archivo de configuración de Maven
 ```
 
-##Notas
+## Notas
 La clase Peliculas contiene los atributos id, title, year, y directors. El id es el identificador único de cada película en MongoDB.
 El código utiliza la API oficial de MongoDB en Java para interactuar con la base de datos y realizar las operaciones CRUD.
