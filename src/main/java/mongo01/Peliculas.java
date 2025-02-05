@@ -2,8 +2,11 @@ package mongo01;
 
 import java.util.List;
 
+import org.bson.types.ObjectId;
+
 public class Peliculas {
 
+	private ObjectId id;
 	private String title;
 	private int year;
 	private List<String> directors;
@@ -13,10 +16,23 @@ public class Peliculas {
 	
 	// Constructor
 	public Peliculas(String title, int year, List<String> directors) {
-		super();
 		this.title = title;
 		this.year = year;
 		this.directors = directors;
+	}
+
+	@Override
+	public String toString() {
+		return "Peliculas [title=" + title + ", year=" + year + ", directors=" + directors + "]";
+	}
+
+	// Getters y setters
+	public ObjectId getId() {
+		return id;
+	}
+
+	public void setId(ObjectId id) {
+		this.id = id;
 	}
 
 	public String getTitle() {
@@ -42,11 +58,7 @@ public class Peliculas {
 	public void setDirectors(List<String> directors) {
 		this.directors = directors;
 	}
-
-	@Override
-	public String toString() {
-		return "Peliculas [title=" + title + ", year=" + year + ", directors=" + directors + "]";
-	}
 	
+
 	
 }
