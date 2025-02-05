@@ -4,6 +4,10 @@ import java.util.List;
 
 import org.bson.types.ObjectId;
 
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.model.Filters;
+import com.mongodb.client.model.Updates;
+
 public class Peliculas {
 
 	private ObjectId id;
@@ -23,8 +27,22 @@ public class Peliculas {
 
 	@Override
 	public String toString() {
-		return "Peliculas [title=" + title + ", year=" + year + ", directors=" + directors + "]";
+		return "Peliculas [title=" + title + 
+				", year=" + year + 
+				", directors=" + directors + "]";
 	}
+	
+	public void save(MongoCollection<Peliculas> coleccion) {
+	    coleccion.updateOne(
+	        Filters.eq("_id", this.getId()),  // Usamos el id como filtro
+	        Updates.combine(
+	            Updates.set("title", this.getTitle()), 
+	            Updates.set("director", this.getDirectors()),
+	            Updates.set("year", this.getYear()) 
+	        )
+	    );
+	}
+
 
 	// Getters y setters
 	public ObjectId getId() {

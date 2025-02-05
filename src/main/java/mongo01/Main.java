@@ -3,6 +3,8 @@ package mongo01;
 import static org.bson.codecs.configuration.CodecRegistries.fromProviders;
 import static org.bson.codecs.configuration.CodecRegistries.fromRegistries;
 
+import java.util.Random;
+
 import org.bson.codecs.configuration.CodecRegistry;
 import org.bson.codecs.pojo.PojoCodecProvider;
 import com.mongodb.MongoClientSettings;
@@ -45,18 +47,21 @@ public class Main {
         
         // Obtenemos la colección de peliculas
         System.out.println("\nObteniendo peliculas...");
-        MongoCollection<Peliculas> peliculas = db.getCollection(
+        MongoCollection<Peliculas> coleccion = db.getCollection(
         		"peliculas", Peliculas.class
         );
 
 		// Buscamos Jurassic World
-        Peliculas pelicula = peliculas.find(
-    		Filters.eq(
-    			"title", "Jurassic World"
-    		) 
+        Peliculas pelicula = coleccion.find(
+        	// .eq hace busqueda exacta
+    		// Filters.eq("title", "Jurassic World") 
+        		
+        	// .regex busca Jurassic World dentro del campo "title"
+        	// // "i" = no case sensitive
+    		Filters.regex("title", "Jurassic World", "i") 
         )
         .first();
-
+        
         // Imprimimos la película obtenida
         if (pelicula != null) {
             System.out.println("\nResultado de la busqueda: \n" + pelicula);
@@ -64,6 +69,17 @@ public class Main {
             System.out.println("\nNo se encontró la película.");
         }
 
+        // Cambiamos el titulo de la pelicula
+        System.out.println("\nCambiamos el nombre de la pelicula");
+        Random random = new Random();
+        int numeroAleatorio = random.nextInt(10) + 1;
+        pelicula.setTitle("Jurassic World " + numeroAleatorio);
+        System.out.println(pelicula);
+
+        // Actualizamos el documento en la base de datos
+        System.out.println("\nGuardamos la modificacion");
+        pelicula.save(coleccion);
+        
         // Cerramos la conexión
         client.close();
 		
