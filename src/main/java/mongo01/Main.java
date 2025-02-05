@@ -79,7 +79,7 @@ public class Main {
         // Actualizamos el documento en la base de datos
         System.out.println("\nGuardamos la modificacion");
         pelicula.save(coleccion);
-        
+                
         // Cerramos la conexión
         client.close();
 		

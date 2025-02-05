@@ -33,6 +33,7 @@ public class Peliculas {
 	}
 	
 	public void save(MongoCollection<Peliculas> coleccion) {
+		// Actualiza alguno de los campos del objeto
 	    coleccion.updateOne(
 	        Filters.eq("_id", this.getId()),  // Usamos el id como filtro
 	        Updates.combine(
@@ -42,6 +43,21 @@ public class Peliculas {
 	        )
 	    );
 	}
+	
+	public void delete(MongoCollection<Peliculas> coleccion) {
+	    // Elimina el objeto
+	    if(this.id != null) {
+	        coleccion.deleteOne(Filters.eq("_id", this.id));
+	    } else {
+	        System.out.println("El objeto no tiene un id asignado, no se puede eliminar.");
+	    }
+	}
+	
+	public void add(MongoCollection<Peliculas> coleccion) {
+	    // Inserta el objeto actual en la colección
+	    coleccion.insertOne(this);
+	}
+
 
 
 	// Getters y setters
